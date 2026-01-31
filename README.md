@@ -116,8 +116,7 @@ Based on the analysis, the following insights emerge:
 
 ## Data Pipeline
 
-```mermaid
-
+```
     A[Kaggle API] --> B[8 CSV Files]
     B --> C[Extract]
     C --> D[Transform & Standardize]
