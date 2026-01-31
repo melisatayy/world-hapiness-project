@@ -1,75 +1,143 @@
-# Global Happiness Analysis: Multi-Year ETL Pipeline & Exploratory Data Study (2015-2022)
 
-## Executive Summary
+# World Happiness Report Analysis (2015-2022)
 
-A data engineering and analytics project showcasing an end-to-end ETL pipeline built in Python, processing 8 years (2015–2022) of World Happiness Report data. The project creates a unified, analytics-ready dataset by standardizing inconsistent schemas and managing data quality across more than 144 countries.
+<div align="center">
 
-Exploratory data analysis was performed to identify key happiness drivers and global well-being trends. The final dataset was imported into Tableau, where interactive dashboards and charts were developed to support country and time-based comparisons.
+![Python](https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white)
+![Pandas](https://img.shields.io/badge/Pandas-150458?style=for-the-badge&logo=pandas&logoColor=white)
+![Tableau](https://img.shields.io/badge/Tableau-E97627?style=for-the-badge&logo=tableau&logoColor=white)
+![Jupyter](https://img.shields.io/badge/Jupyter-F37626?style=for-the-badge&logo=jupyter&logoColor=white)
 
-### Key Achievements
+[View Dashboard](https://public.tableau.com/app/profile/melis.atay6708/viz/HappinesTableu/WorldHappinessReport?publish=yes) • [Explore Notebook](./main.ipynb) • [Dataset](https://www.kaggle.com/datasets/mathurinache/world-happiness-report)
 
-- Built robust ETL pipeline handling 8 different data schemas
-- Implemented hierarchical missing data imputation strategy
-- Identified GDP and social support as primary happiness drivers
-- Visualized temporal trends and country-level comparisons
+</div>
 
----
+This project analyzed **8 years of global happiness data** from the World Happiness Report to understand what drives national well-being and how it has evolved over time.
 
-## Interactive Dashboard
+Insights and recommendations are provided on the following key areas:
+- **Happiness Drivers:** Which factors most strongly predict a country's happiness score?
+- **Temporal Trends:** How has global happiness changed between 2015-2022?
+- **Country Comparisons:** Which countries consistently rank highest/lowest, and why?
 
-### Tableau Public Dashboard
-
-Explore the data interactively through a comprehensive Tableau dashboard featuring:
-
-- **World Happiness Map** - Geographic visualization of happiness scores
-- **Correlation Analysis** - GDP, Social Support, and Life Expectancy relationships
-- **Temporal Trends** - Year-over-year happiness score changes by country
-- **Country Rankings** - Top and bottom performers with detailed metrics
-
-![World Happiness Dashboard](./assets/dashboard_screenshot.png)
-
-**🔗 [View Interactive Dashboard on Tableau Public](https://public.tableau.com/app/profile/melis.atay6708/viz/HappinesTableu/WorldHappinessReport?publish=yes)**
-
-> **Note:** The dashboard allows filtering by year, country, and happiness factors for deeper exploration.
-
-## Business Problem (Research Question)
-
-### Problem Statement
-
-> What really makes a country happy — and does it change over time?
-Using multi-year global data, can we analyze how economic and social factors influence happiness and uncover meaningful patterns and comparisons across countries?
-
-### Why This Matters
-
-- **Happiness reflects real-life conditions**, such as health, income, freedom, and social support  
-- **Inconsistent and fragmented data hides long-term trends**, making meaningful comparisons difficult  
-- **Understanding what drives happiness** helps uncover global patterns and compare quality of life across countries  
+An interactive Tableau dashboard can be explored [here](https://public.tableau.com/app/profile/melis.atay6708/viz/HappinesTableu/WorldHappinessReport?publish=yes).
 
 ---
 
-## �️ Tech Stack
+## Dashboard
 
-| Category | Tools |
-|----------|-------|
+![Dashboard Screenshot](./assets/dashboard_screenshot.png)
+
+The dashboard visualizes happiness scores across countries and time, featuring:
+- **World Map** showing geographic distribution of happiness
+- **Trend Analysis** tracking yearly changes
+- **Factor Correlations** revealing key drivers
+- **Country Rankings** for easy comparison
+
+---
+
+## Dataset Structure
+
+The World Happiness Report dataset from Kaggle contains annual surveys (2015-2022) with varying schemas. After ETL processing:
+
+| Column | Description |
+|--------|-------------|
+| `Country` | Country name (standardized) |
+| `Year` | Survey year (2015-2022) |
+| `Happiness_Score` | Overall happiness rating (0-10 scale) |
+| `GDP_per_capita` | Economic prosperity indicator |
+| `Social_support` | Having someone to count on |
+| `Life_expectancy` | Healthy life expectancy |
+| `Freedom` | Freedom to make life choices |
+| `Generosity` | Charitable giving |
+| `Corruption` | Perception of corruption |
+
+---
+
+## Insights Summary
+
+### 1. GDP and Social Support are the Strongest Predictors
+
+![Factor Correlation](./assets/factor_correlation.png)
+
+- **GDP per Capita (r=0.74)** and **Social Support (r=0.72)** show the highest correlation with happiness
+- **Generosity (r=0.11)** has surprisingly weak correlation
+- Economic factors matter, but social connections are equally important
+
+### 2. Global Happiness is Slowly Increasing
+
+![Yearly Trends](./assets/yearly_trends.png)
+
+- Average happiness rose from **5.38 (2015)** to **5.55 (2022)**
+- 2017 saw the lowest average happiness score
+- Despite COVID-19, 2022 recorded the highest average
+
+### 3. Nordic Countries Consistently Lead
+
+![Country Rankings](./assets/country_rankings.png)
+
+| Top 5 Countries | Avg Score | Bottom 5 Countries | Avg Score |
+|-----------------|-----------|-------------------|-----------|
+| Finland | 7.59 | Burundi | 3.08 |
+| Denmark | 7.56 | Syria | 3.29 |
+| Iceland | 7.52 | Afghanistan | 3.33 |
+| Switzerland | 7.50 | Central African Rep. | 3.37 |
+| Netherlands | 7.44 | Rwanda | 3.38 |
+
+**Nordic success factors:** Strong social safety nets, high trust, work-life balance policies.
+
+### 4. Correlation Matrix Reveals Key Relationships
+
+![Correlation Heatmap](./assets/correlation_heatmap.png)
+
+---
+
+## Recommendations
+
+Based on the analysis, the following insights emerge:
+
+1. **Invest in Social Infrastructure:** Social support shows nearly equal importance to GDP, suggesting community programs yield significant happiness returns.
+
+2. **Focus Beyond Economic Growth:** While GDP matters, countries should prioritize life expectancy, freedom, and anti-corruption efforts for well-being.
+
+3. **Learn from Nordic Model:** Top performers share strong social safety nets and work-life balance - policies worth emulating.
+
+---
+
+## Tech Stack
+
+| Category | Technologies |
+|----------|-------------|
 | **Languages** | Python |
 | **Libraries** | Pandas, NumPy, Matplotlib, Seaborn |
 | **Tools** | Jupyter Notebook, Kaggle API, Tableau Public |
-| **Techniques** | ETL, data imputation, statistical analysis, data visualization |
+| **Techniques** | ETL, Data Imputation, Statistical Analysis |
 
 ---
 
-## Data Pipeline Architecture
+## Data Pipeline
 
+```mermaid
+
+    A[Kaggle API] --> B[8 CSV Files]
+    B --> C[Extract]
+    C --> D[Transform & Standardize]
+    D --> E[Handle Missing Values]
+    E --> F[Unified Dataset]
+    F --> G[EDA & Visualization]
 ```
-Raw Data (Kaggle) → Extract (8 CSV files) → Transform (Standardize + Clean) → Load (Unified Dataset) → Analyze (EDA) → Visualize
-```
+
 ---
 
-##  Key Findings & Visualizations
+## Project Structure
 
-- **Temporal Analysis:** Slight upward trend in global happiness (2015: 5.38 → 2022: 5.55)
-- **Top Performers:** Finland (7.59), Denmark (7.56), Iceland (7.52)
-- **Bottom Performers:** Burundi (3.08), Syria (3.29), Afghanistan (3.33)
-- **Correlation Insights:** GDP per capita and social support show strongest positive correlation with happiness
-- **COVID-19 Impact:** 2020-2021 data exhibited significant schema changes and reporting inconsistencies, reflecting the pandemic's disruption to global survey methodologies
+```
+hapiness-portfolio-project/
+├── main.ipynb                    # Analysis notebook
+├── world_happiness_cleaned.csv   # Cleaned dataset
+├── requirements.txt              # Dependencies
+└── assets/                       # Visualizations
+```
 
+## Contact
+
+**Melis Atay** • [LinkedIn](https://www.linkedin.com/in/melis-atay1/) • [GitHub](https://github.com/melisatayy)
